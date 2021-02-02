@@ -1,7 +1,7 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 body {
   background-color: green;
-  padding-top: 15px;
+  padding: 15px 10px 0px 10px;
 }
 .card {
   padding: 0px 5px 0px 5px;
@@ -11,26 +11,26 @@ body {
   box-shadow: 6px 4px 9px -3px rgba(0, 0, 0, 0.75);
 }
 #number {
-  font-size: 54px;
+  font-size: 35px;
 }
 .card-diamond:after {
   content: " \25CA";
   color: red;
-  font-size: 55px;
+  font-size: 35px;
 }
 .card-spade:after {
   content: " \2660";
   color: black;
-  font-size: 55px;
+  font-size: 35px;
 }
 
 .card-hearth:after {
   content: " \2665";
   color: red;
-  font-size: 55px;
+  font-size: 35px;
 }
 .card-club:after {
   content: " \2663";
   color: black;
-  font-size: 55px;
+  font-size: 35px;
 }

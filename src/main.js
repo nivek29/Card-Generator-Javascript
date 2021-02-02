@@ -30,11 +30,11 @@ function generarValor() {
     "A"
   ];
 
-  var valorCarta = document.getElementById("number");
-  valorCarta.innerHTML = valores[valor];
+  var valorCarta = document.getElementsByTagName("p");
+  valorCarta[0].innerHTML = valores[valor];
+  valorCarta[1].innerHTML = valores[valor];
   console.log(valores[valor]);
 }
-
 function generarPalo() {
   let valor = Math.floor(Math.random() * (4 - 0) + 0);
   let palos = ["card-diamond", "card-spade", "card-club", "card-hearth"];
