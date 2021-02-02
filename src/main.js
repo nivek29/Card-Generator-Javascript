@@ -68,9 +68,9 @@ function generarPalo() {
   return palos[valor];
 }
 
-function plantillaCarta(sim, valorNum) {
-  let totalCartas = 0;
-  while (totalCartas < valorNum.length) {
+function plantillaCarta(valorNum, sim) {
+ 
+  
     var cartaContent = document.createElement("div");
     cartaContent.innerHTML =
       "<div class=card style=width: 3rem;> <div><h2 class='" +
@@ -86,5 +86,5 @@ function plantillaCarta(sim, valorNum) {
     cartaContent.classList.add("col-md-3");
     cartaContent.classList.add("col-sm-4");
     cartaContent.classList.add("bg-info");
-  }
+  
 }
