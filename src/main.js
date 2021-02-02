@@ -6,7 +6,7 @@ import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
 window.onload = function() {
-  
+  insertarCarta(arrayNum(10));
 };
 
 function arrayNum(cantidad) {
@@ -36,7 +36,7 @@ function ordenarArreglo(array) {
   return array;
 }
 
-function generarValor(arrayOrdenado) {
+function insertarCarta(arrayOrdenado) {
   let valoresArray = [];
   let x = 0;
   let valoresPred = [
@@ -54,10 +54,12 @@ function generarValor(arrayOrdenado) {
     "Q",
     "K"
   ];
+
   while (x < arrayOrdenado.length) {
-    valoresArray[x] = valoresPred[arrayOrdenado[x]];
+    valoresPred[arrayOrdenado[x]];
+    plantillaCarta(valoresPred[arrayOrdenado[x]],generarPalo());
+    x++;
   }
-  return valoresArray;
 }
 
 function generarPalo() {
