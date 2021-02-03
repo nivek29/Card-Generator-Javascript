@@ -5,18 +5,23 @@ import "./style.css";
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
-var cartasSeleccionadas;
+var cartasSeleccionadas = [];
 var simbolosSelecionados = [];
 
 document.getElementById("mostrar").addEventListener(
   "click",
   function(event) {
     var cantidad = document.getElementById("cantidad").value;
-    cartasSeleccionadas = arrayNum(cantidad);
-    generarPalo(cantidad);
-    insertarCarta(cartasSeleccionadas, 1);
-    let boton = document.getElementById("mostrar");
-    boton.style.display = "none";
+    console.log(cantidad);
+    if (cantidad === 0) {
+      alert("Debes ingresar la cantidad de cartas");
+    } else {
+      cartasSeleccionadas = arrayNum(cantidad);
+      generarPalo(cantidad);
+      insertarCarta(cartasSeleccionadas, 1);
+      let boton = document.getElementById("mostrar");
+      boton.style.display = "none";
+    }
   },
   false
 );
@@ -24,18 +29,34 @@ document.getElementById("mostrar").addEventListener(
 document.getElementById("bubble").addEventListener(
   "click",
   function(event) {
-    insertarCarta(ordenarArregloBubble(cartasSeleccionadas), 2);
-    let boton = document.getElementById("bubble");
-    boton.style.display = "none";
+    if (cartasSeleccionadas.length === 0) {
+      alert("Aun no se han generado cartas");
+    } else {
+      insertarCarta(ordenarArregloBubble(cartasSeleccionadas), 2);
+      let boton = document.getElementById("bubble");
+      boton.style.display = "none";
+    }
   },
   false
 );
 document.getElementById("select").addEventListener(
   "click",
   function(event) {
-    insertarCarta(ordenarArregloSelection(cartasSeleccionadas), 3);
-    let boton = document.getElementById("select");
-    boton.style.display = "none";
+    if (cartasSeleccionadas.length === 0) {
+      alert("Aun no se han generado cartas");
+    } else {
+      insertarCarta(ordenarArregloSelection(cartasSeleccionadas), 3);
+      let boton = document.getElementById("select");
+      boton.style.display = "none";
+    }
+  },
+  false
+);
+
+document.getElementById("reset").addEventListener(
+  "click",
+  function(event) {
+    location.reload();
   },
   false
 );
@@ -70,7 +91,25 @@ function ordenarArregloBubble(array) {
   }
   return array;
 }
-function ordenarArregloSelection(array) {}
+function ordenarArregloSelection(array) {
+  let min = 0;
+  while (min < array.length) {
+    for (let i = min + 1; i < array.length; i++) {
+      if (array[min] > array[i]) {
+        let aux = array[min];
+        let auxSim = simbolosSelecionados[min];
+
+        array[min] = array[i];
+        simbolosSelecionados[min] = simbolosSelecionados[i];
+
+        array[i] = aux;
+        simbolosSelecionados[i] = auxSim;
+      }
+    }
+    min++;
+  }
+  return array;
+}
 function insertarCarta(array, opcion) {
   let valoresArray = [];
   let x = 0;
