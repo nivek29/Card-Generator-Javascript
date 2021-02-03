@@ -13,7 +13,7 @@ document.getElementById("mostrar").addEventListener(
   function(event) {
     var cantidad = document.getElementById("cantidad").value;
     console.log(cantidad);
-    if (cantidad === 0) {
+    if (cantidad === "") {
       alert("Debes ingresar la cantidad de cartas");
     } else {
       cartasSeleccionadas = arrayNum(cantidad);
