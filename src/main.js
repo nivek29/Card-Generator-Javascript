@@ -5,9 +5,40 @@ import "./style.css";
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
-window.onload = function() {
-  insertarCarta(arrayNum(10));
-};
+var cartasSeleccionadas;
+var simbolosSelecionados = [];
+
+document.getElementById("mostrar").addEventListener(
+  "click",
+  function(event) {
+    var cantidad = document.getElementById("cantidad").value;
+    cartasSeleccionadas = arrayNum(cantidad);
+    generarPalo(cantidad);
+    insertarCarta(cartasSeleccionadas, 1);
+    let boton = document.getElementById("mostrar");
+    boton.style.display = "none";
+  },
+  false
+);
+
+document.getElementById("bubble").addEventListener(
+  "click",
+  function(event) {
+    insertarCarta(ordenarArregloBubble(cartasSeleccionadas), 2);
+    let boton = document.getElementById("bubble");
+    boton.style.display = "none";
+  },
+  false
+);
+document.getElementById("select").addEventListener(
+  "click",
+  function(event) {
+    insertarCarta(ordenarArregloSelection(cartasSeleccionadas), 3);
+    let boton = document.getElementById("select");
+    boton.style.display = "none";
+  },
+  false
+);
 
 function arrayNum(cantidad) {
   var arr = [];
@@ -18,16 +49,20 @@ function arrayNum(cantidad) {
   }
   return arr;
 }
-
-function ordenarArreglo(array) {
+function ordenarArregloBubble(array) {
   let wall = array.length - 1;
   while (wall > 0) {
     let index = 0;
     while (index < wall) {
       if (array[index] > array[index + 1]) {
         let aux = array[index];
+        let auxSimbols = simbolosSelecionados[index];
+
         array[index] = array[index + 1];
+        simbolosSelecionados[index] = simbolosSelecionados[index + 1];
+
         array[index + 1] = aux;
+        simbolosSelecionados[index + 1] = auxSimbols;
       }
       index++;
     }
@@ -35,8 +70,8 @@ function ordenarArreglo(array) {
   }
   return array;
 }
-
-function insertarCarta(arrayOrdenado) {
+function ordenarArregloSelection(array) {}
+function insertarCarta(array, opcion) {
   let valoresArray = [];
   let x = 0;
   let valoresPred = [
@@ -54,37 +89,41 @@ function insertarCarta(arrayOrdenado) {
     "Q",
     "K"
   ];
+  var almacenContent = document.createElement("div");
+  almacenContent.classList.add("row");
+  almacenContent.id = opcion;
+  document.querySelector("body").appendChild(almacenContent);
 
-  while (x < arrayOrdenado.length) {
-    valoresPred[arrayOrdenado[x]];
-    plantillaCarta(valoresPred[arrayOrdenado[x]],generarPalo());
+  while (x < array.length) {
+    valoresPred[array[x]];
+    plantillaCarta(valoresPred[array[x]], simbolosSelecionados[x], opcion);
     x++;
   }
 }
-
-function generarPalo() {
-  let valor = Math.floor(Math.random() * (4 - 0) + 0);
+function generarPalo(cantidad) {
+  let y = 0;
+  simbolosSelecionados = [];
   let palos = ["card-diamond", "card-spade", "card-club", "card-hearth"];
-  return palos[valor];
+  while (y < cantidad) {
+    simbolosSelecionados.push(palos[Math.floor(Math.random() * (4 - 0) + 0)]);
+    y++;
+  }
 }
+function plantillaCarta(valorNum, sim, opcion) {
+  var cartaContent = document.createElement("div");
+  cartaContent.classList.add("contenedor");
+  cartaContent.innerHTML =
+    "<div class=card style=width:125px> <div><h2 class='" +
+    sim +
+    "'></h2></div><div><p class= text-center id= number>" +
+    valorNum +
+    "</p></div><div class=text-right><h2 class='" +
+    sim +
+    "'></h2></div></div>";
 
-function plantillaCarta(valorNum, sim) {
- 
-  
-    var cartaContent = document.createElement("div");
-    cartaContent.innerHTML =
-      "<div class=card style=width: 3rem;> <div><h2 class='" +
-      sim +
-      "'></h2></div><div><p class= text-center id= number>'" +
-      valorNum +
-      "'</p></div><div class=text-right><h2 class='" +
-      sim +
-      "'></h2></div></div>";
-
-    document.querySelector("div").appendChild(cartaContent);
-    cartaContent.classList.add("col-lg-2");
-    cartaContent.classList.add("col-md-3");
-    cartaContent.classList.add("col-sm-4");
-    cartaContent.classList.add("bg-info");
-  
+  document.getElementById(opcion).appendChild(cartaContent);
+  cartaContent.classList.add("col-lg-2");
+  cartaContent.classList.add("col-md-3");
+  cartaContent.classList.add("col-sm-4");
+  cartaContent.classList.add("bg-info");
 }

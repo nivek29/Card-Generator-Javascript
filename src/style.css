@@ -34,3 +34,13 @@ body {
   color: black;
   font-size: 35px;
 }
+.card {
+  margin-bottom: 25px;
+}
+button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.row {
+  border-bottom: 3px solid black;
+}
